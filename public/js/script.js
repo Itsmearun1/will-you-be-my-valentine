@@ -47,13 +47,14 @@ const questionHeading = document.getElementById("question-heading");
 const successMessage = document.getElementById("success-message");
 function createCalendarInvite() {
   const title = "Valentine’s Date 💕";
-  const description = "Movie and food 🍿🍽️";
+  const description =
+    "Spending the day together 💕\nMovie and food 🍿🍽️";
   const location = "Calicut";
   const inviteEmail = "prafeenaalicephilendran@gmail.com";
 
-  // Feb 14, 7:30 PM – 10:30 PM (local time)
-  const startDate = "20260214T193000";
-  const endDate = "20260214T223000";
+  // Feb 14, 7:00 AM – 9:00 PM (local time)
+  const startDate = "20260214T070000";
+  const endDate   = "20260214T210000";
 
   const icsContent = `
 BEGIN:VCALENDAR
@@ -68,6 +69,13 @@ DTSTART:${startDate}
 DTEND:${endDate}
 ORGANIZER;CN=You:mailto:${inviteEmail}
 ATTENDEE;CN=Alice;RSVP=TRUE:mailto:${inviteEmail}
+
+BEGIN:VALARM
+TRIGGER:-PT1H
+ACTION:DISPLAY
+DESCRIPTION:Valentine’s Date 💕
+END:VALARM
+
 END:VEVENT
 END:VCALENDAR
   `.trim();
@@ -78,7 +86,9 @@ END:VCALENDAR
 
   const link = document.createElement("a");
   link.href = URL.createObjectURL(blob);
-  link.download = "valentines-date.ics";
+
+  // Personal filename
+  link.download = "us-14th-feb.ics";
 
   document.body.appendChild(link);
   link.click();
