@@ -66,3 +66,56 @@ no_button.addEventListener("click", () => {
   } else {
     alert(list[list.length - 1]);
     resetButtons();
+  }
+});
+
+/* ---------- YES BUTTON ---------- */
+yes_button.addEventListener("click", () => {
+  banner.src = "public/images/yes.gif";
+  refreshBanner();
+
+  document.querySelector(".buttons").style.display = "none";
+
+  if (language === "french") {
+    questionHeading.textContent = "Je savais que tu dirais oui 💖";
+  } else if (language === "thai") {
+    questionHeading.textContent = "เรารู้อยู่แล้วว่าต้องตอบตกลง 💕";
+  } else {
+    questionHeading.textContent = "I knew you’d say yes 💕";
+  }
+
+  // ✅ FINAL success line
+  successMessage.textContent = "Yippee Love 💕 See you soooonnn";
+  document.querySelector(".message").style.display = "block";
+});
+
+/* ---------- LANGUAGE CHANGE ---------- */
+function changeLanguage() {
+  language = document.getElementById("language-select").value;
+
+  if (language === "french") {
+    questionHeading.textContent = "Tu veux être mon valentin ? 💖";
+  } else if (language === "thai") {
+    questionHeading.textContent = "คืนดีกับเราได้อ่ะป่าว? 💖";
+  } else {
+    questionHeading.textContent = "Will you be my valentine? 💖";
+  }
+
+  no_button.textContent = answers_no[language][0];
+  yes_button.textContent = answers_yes[language];
+}
+
+/* ---------- HELPERS ---------- */
+function refreshBanner() {
+  const src = banner.src;
+  banner.src = "";
+  banner.src = src;
+}
+
+function resetButtons() {
+  i = 1;
+  clicks = 0;
+  scale = 1;
+  yes_button.style.transform = "scale(1)";
+  no_button.textContent = answers_no[language][0];
+}
