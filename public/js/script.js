@@ -1,153 +1,107 @@
 const answers_no = {
-    english: [
-        "No",
-        "Are you sure?",
-        "Are you really sure??",
-        "Are you really realy sure???",
-        "Think again?",
-        "Don't believe in second chances?",
-        "Why are you being so cold?",
-        "Maybe we can talk about it?",
-        "I am not going to ask again!",
-        "Ok now this is hurting my feelings!",
-        "You are now just being mean!",
-        "Why are you doing this to me?",
-        "Please give me a chance!",
-        "I am begging you to stop!",
-        "Ok, Let's just start over.."
-    ],
-    french: [
-        "Non",
-        "Tu es sûr ?",
-        "Tu es vraiment sûr ??",
-        "Tu es vraiment vraiment sûr ???",
-        "Réfléchis encore?",
-        "Tu ne crois pas aux deuxièmes chances ?",
-        "Pourquoi tu es si froid?",
-        "Peut-être, on peut en parler ?",
-        "Je ne vais pas demander encore une fois!",
-        "D'accord, maintenant ca me fait mal!",
-        "Tu es juste méchant!",
-        "Pourquoi tu me fais ça?",
-        "Donnez-moi une chance plz!",
-        "Je te supplie d'arrêter!",
-        "D'accord, recommençons.."
-    ],
-    thai: [
-        "ไม่อ่ะ",
-        "แน่ใจจริงๆหรอคะ?",
-        "แน่ใจจริงๆ จริงๆนะคะ?",
-        "อย่าบอกนะว่านี่แน่ใจสุดๆแล้วจริงๆ ?",
-        "ลองคิดดูอีกทีหน่อยสิคะ..",
-        "ขอโอกาศที่สองทีค่ะ..",
-        "อย่าเย็นชาสิคะ กระซิกๆ",
-        "ขอร้องนะคะ",
-        "น้าาาๆๆๆๆๆ",
-        "เราจะร้องไห้เอานะ กระซิกๆ",
-        "จะเอางี้ๆจริงหรอคะ",
-        "ฮือออออ",
-        "ขอโอกาศครั้งที่สองที่ค่ะ!",
-        "ขอร้องละค่าาา",
-        "โอเคค่ะ.. งั้นเริ่มใหม่ !"
-    ]
+  english: [
+    "No",
+    "Are you sure, Al?",
+    "Really sure??",
+    "Like… REALLY sure?",
+    "Think again?",
+    "That kinda hurt 🥲",
+    "Al pls",
+    "I’m begging now",
+    "Okay wow 😭",
+    "Let’s restart…"
+  ],
+  french: [
+    "Non",
+    "Tu es sûre Al ?",
+    "Vraiment sûre ?",
+    "Réfléchis encore",
+    "Ça fait un peu mal 🥲",
+    "S’il te plaît Al",
+    "Ok on recommence…"
+  ],
+  thai: [
+    "ไม่อ่ะ",
+    "แน่ใจจริงๆหรอ Al",
+    "คิดดูอีกทีนะ",
+    "เราจะร้องไห้แล้วนะ 😭",
+    "โอเค เริ่มใหม่ก็ได้"
+  ]
 };
 
-answers_yes = {
-    "english": "Yes",
-    "french": "Oui",
-    "Thailand": "เย่ คืนดีกันแล้วน้า"
-}
+const answers_yes = {
+  english: "Yes 💕",
+  french: "Oui 💕",
+  thai: "เย่ 💖"
+};
 
-let language = "english"; // Default language is English
-const no_button = document.getElementById('no-button');
-const yes_button = document.getElementById('yes-button');
+let language = "english";
 let i = 1;
-let size = 50;
+let size = 44;
 let clicks = 0;
 
-no_button.addEventListener('click', () => {
-    // Change banner source
-    let banner = document.getElementById('banner');
-    if (clicks === 0) {
-        banner.src = "public/images/no.gif";
-        refreshBanner();
-    }
-    clicks++;
-    // increase button height and width gradually to 250px
-    const sizes = [40, 50, 30, 35, 45]
-    const random = Math.floor(Math.random() * sizes.length);
-    size += sizes[random]
-    yes_button.style.height = `${size}px`;
-    yes_button.style.width = `${size}px`;
-    let total = answers_no[language].length;
-    // change button text
-    if (i < total - 1) {
-        no_button.innerHTML = answers_no[language][i];
-        i++;
-    } else if (i === total - 1) {
-        alert(answers_no[language][i]);
-        i = 1;
-        no_button.innerHTML = answers_no[language][0];
-        yes_button.innerHTML = answers_yes[language];
-        yes_button.style.height = "50px";
-        yes_button.style.width = "50px";
-        size = 50;
-    }
+const no_button = document.getElementById("no-button");
+const yes_button = document.getElementById("yes-button");
+
+no_button.addEventListener("click", () => {
+  const banner = document.getElementById("banner");
+
+  if (clicks === 0) {
+    banner.src = "public/images/no.gif";
+    refreshBanner();
+  }
+
+  clicks++;
+
+  size = Math.min(size + 10, 160);
+  yes_button.style.transform = `scale(${size / 44})`;
+
+  const list = answers_no[language];
+  if (i < list.length) {
+    no_button.textContent = list[i++];
+  } else {
+    alert(list[list.length - 1]);
+    i = 1;
+    clicks = 0;
+    size = 44;
+    yes_button.style.transform = "scale(1)";
+    no_button.textContent = list[0];
+  }
 });
 
-yes_button.addEventListener('click', () => {
-    // change banner gif path
-    let banner = document.getElementById('banner');
-    banner.src = "public/images/yes.gif";
-    refreshBanner();
-    // hide buttons div
-    let buttons = document.getElementsByClassName('buttons')[0];
-    buttons.style.display = "none";
-    // show message div
-    let message = document.getElementsByClassName('message')[0];
-    message.style.display = "block";
+yes_button.addEventListener("click", () => {
+  const banner = document.getElementById("banner");
+  banner.src = "public/images/yes.gif";
+  refreshBanner();
+
+  document.querySelector(".buttons").style.display = "none";
+  document.querySelector(".message").style.display = "block";
 });
 
 function refreshBanner() {
-    // Reload banner gif to force load  
-    let banner = document.getElementById('banner');
-    let src = banner.src;
-    banner.src = '';
-    banner.src = src;
+  const banner = document.getElementById("banner");
+  const src = banner.src;
+  banner.src = "";
+  banner.src = src;
 }
 
 function changeLanguage() {
-    const selectElement = document.getElementById("language-select");
-    const selectedLanguage = selectElement.value;
-    language = selectedLanguage;
+  language = document.getElementById("language-select").value;
 
-    // Update question heading
-    const questionHeading = document.getElementById("question-heading");
-    if (language === "french") {
-        questionHeading.textContent = "Tu veux être mon valentin?";
-    } else if (language === "thai") {
-        questionHeading.textContent = "คืนดีกับเราได้อ่ะป่าว?";
-    } else {
-        questionHeading.textContent = "Will you be my valentine?";
-    }
+  const heading = document.getElementById("question-heading");
+  const success = document.getElementById("success-message");
 
-    // Reset yes button text
-    yes_button.innerHTML = answers_yes[language];
+  if (language === "french") {
+    heading.textContent = "Al, tu veux être mon valentin ? 💖";
+    success.textContent = "Yepppie Al 💕 à bientôt :3";
+  } else if (language === "thai") {
+    heading.textContent = "Al คืนดีกับเราได้อ่ะป่าว? 💖";
+    success.textContent = "ฮูเร่ Al 💕 คืนดีกันแล้วน้า :3";
+  } else {
+    heading.textContent = "Al, will you be my valentine? 💖";
+    success.textContent = "Yepppieee Al 💕 see you sooonnn :3";
+  }
 
-    // Reset button text to first in the new language
-    if (clicks === 0) {
-        no_button.innerHTML = answers_no[language][0];
-    } else {
-        no_button.innerHTML = answers_no[language][clicks];
-    }
-
-    // Update success message
-    const successMessage = document.getElementById("success-message");
-    if (language === "french") {
-        successMessage.textContent = "Yepppie, à bientôt :3";
-    } else if (language === "thai") {
-        successMessage.textContent = "ฮูเร่ คืนดีกันแล้วน้า :3";
-    } else {
-        successMessage.textContent = "Yepppie, see you sooonnn :3";
-    }
+  no_button.textContent = answers_no[language][0];
+  yes_button.textContent = answers_yes[language];
 }
