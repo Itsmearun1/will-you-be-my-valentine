@@ -46,9 +46,9 @@ const banner = document.getElementById("banner");
 const questionHeading = document.getElementById("question-heading");
 const successMessage = document.getElementById("success-message");
 function createCalendarInvite() {
-  const title = "Movie Date & Food 💕";
-  const description = "Yippee Love 💕 See you soooonnn";
-  const location = "Movie + food (together ❤️)";
+  const title = "Valentine’s Date 💕";
+  const description = "Movie and food 🍿🍽️\nYippee Love 💕 See you soooonnn";
+  const location = "Calicut";
   const inviteEmail = "prafeenaalicephilendran@gmail.com";
 
   // Feb 14, 7:30 PM – 10:30 PM (local time)
@@ -67,7 +67,7 @@ LOCATION:${location}
 DTSTART:${startDate}
 DTEND:${endDate}
 ORGANIZER;CN=You:mailto:${inviteEmail}
-ATTENDEE;CN=Her;RSVP=TRUE:mailto:${inviteEmail}
+ATTENDEE;CN=Alice;RSVP=TRUE:mailto:${inviteEmail}
 END:VEVENT
 END:VCALENDAR
   `.trim();
@@ -78,7 +78,7 @@ END:VCALENDAR
 
   const link = document.createElement("a");
   link.href = URL.createObjectURL(blob);
-  link.download = "valentine-date.ics";
+  link.download = "valentines-date.ics";
 
   document.body.appendChild(link);
   link.click();
