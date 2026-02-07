@@ -126,9 +126,10 @@ yes_button.addEventListener("click", () => {
   // ✅ FINAL success line
   successMessage.textContent = "Yippee Love 💕 See you soooonnn";
   document.querySelector(".message").style.display = "block";
-    setTimeout(() => {
-    createCalendarInvite();
-  }, 
+  setTimeout(() => {
+  createCalendarInvite();
+  }, 1500);
+ 
 });
 
 /* ---------- LANGUAGE CHANGE ---------- */
