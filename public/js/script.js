@@ -45,6 +45,45 @@ const yes_button = document.getElementById("yes-button");
 const banner = document.getElementById("banner");
 const questionHeading = document.getElementById("question-heading");
 const successMessage = document.getElementById("success-message");
+function createCalendarInvite() {
+  const title = "Movie Date & Food 💕";
+  const description = "Yippee Love 💕 See you soooonnn";
+  const location = "Movie + food (together ❤️)";
+  const inviteEmail = "prafeenaalicephilendran@gmail.com";
+
+  // Feb 14, 7:30 PM – 10:30 PM (local time)
+  const startDate = "20260214T193000";
+  const endDate = "20260214T223000";
+
+  const icsContent = `
+BEGIN:VCALENDAR
+VERSION:2.0
+CALSCALE:GREGORIAN
+METHOD:REQUEST
+BEGIN:VEVENT
+SUMMARY:${title}
+DESCRIPTION:${description}
+LOCATION:${location}
+DTSTART:${startDate}
+DTEND:${endDate}
+ORGANIZER;CN=You:mailto:${inviteEmail}
+ATTENDEE;CN=Her;RSVP=TRUE:mailto:${inviteEmail}
+END:VEVENT
+END:VCALENDAR
+  `.trim();
+
+  const blob = new Blob([icsContent], {
+    type: "text/calendar;charset=utf-8"
+  });
+
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "valentine-date.ics";
+
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
 
 /* ---------- NO BUTTON ---------- */
 no_button.addEventListener("click", () => {
@@ -87,6 +126,9 @@ yes_button.addEventListener("click", () => {
   // ✅ FINAL success line
   successMessage.textContent = "Yippee Love 💕 See you soooonnn";
   document.querySelector(".message").style.display = "block";
+    setTimeout(() => {
+    createCalendarInvite();
+  }, 
 });
 
 /* ---------- LANGUAGE CHANGE ---------- */
