@@ -1,122 +1,68 @@
-* {
-  box-sizing: border-box;
-}
+const answers_no = {
+  english: [
+    "No",
+    "Are you sure?",
+    "Really sure??",
+    "Like… REALLY sure?",
+    "Think again?",
+    "That kinda hurt 🥲",
+    "Please?",
+    "I’m begging now",
+    "Okay wow 😭",
+    "Alright… start over?"
+  ],
+  french: [
+    "Non",
+    "Tu es sûr ?",
+    "Vraiment sûr ??",
+    "Réfléchis encore",
+    "Ça fait un peu mal 🥲",
+    "S’il te plaît",
+    "Bon… on recommence ?"
+  ],
+  thai: [
+    "ไม่อ่ะ",
+    "แน่ใจจริงๆหรอ",
+    "คิดดูอีกทีนะ",
+    "เราจะร้องไห้แล้วนะ 😭",
+    "โอเค เริ่มใหม่ก็ได้"
+  ]
+};
 
-body {
-  min-height: 100vh;
-  margin: 0;
-  background: linear-gradient(135deg, #ffe6eb, #fff);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+const answers_yes = {
+  english: "Yes 💕",
+  french: "Oui 💕",
+  thai: "เย่ 💖"
+};
 
-/* Container */
-.container {
-  width: 100%;
-  padding: 16px;
-}
+let language = "english";
+let i = 1;
+let clicks = 0;
+let scale = 1;
 
-/* Card */
-.card {
-  background: #fff;
-  width: 100%;
-  max-width: 420px;
-  margin: auto;
-  padding: 20px 18px 28px;
-  border-radius: 20px;
-  box-shadow: 0 18px 40px rgba(0,0,0,0.12);
-  text-align: center;
-}
+const no_button = document.getElementById("no-button");
+const yes_button = document.getElementById("yes-button");
+const banner = document.getElementById("banner");
+const questionHeading = document.getElementById("question-heading");
+const successMessage = document.getElementById("success-message");
 
-/* Banner */
-.banner-gif img {
-  width: 100%;
-  max-height: 220px;
-  object-fit: contain;
-  border-radius: 14px;
-}
-
-/* Headings */
-h1 {
-  margin: 18px 0 10px;
-  font-size: 1.4rem;
-  line-height: 1.3;
-  color: #333;
-}
-
-/* Buttons */
-.buttons {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  margin-top: 22px;
-  flex-wrap: wrap;
-}
-
-button {
-  border: none;
-  border-radius: 999px;
-  padding: 14px 26px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  min-width: 120px;
-}
-
-/* Yes */
-#yes-button {
-  background: #22c55e;
-  color: #fff;
-  box-shadow: 0 10px 25px rgba(34,197,94,0.35);
-}
-
-#yes-button:active {
-  transform: scale(1.08);
-}
-
-/* No */
-#no-button {
-  background: #ef4444;
-  color: #fff;
-}
-
-/* Message */
-.message {
-  display: none;
-  margin-top: 24px;
-}
-
-.message h2 {
-  color: #ec4899;
-  font-size: 1.3rem;
-  line-height: 1.4;
-}
-
-/* Language selector */
-.language-selector {
-  margin-top: 26px;
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  align-items: center;
-}
-
-select {
-  padding: 8px 12px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-  font-size: 0.95rem;
-}
-
-/* Small phones */
-@media (max-width: 360px) {
-  h1 {
-    font-size: 1.25rem;
+/* ---------- NO BUTTON ---------- */
+no_button.addEventListener("click", () => {
+  if (clicks === 0) {
+    banner.src = "public/images/no.gif";
+    refreshBanner();
   }
 
-  button {
-    min-width: 100%;
-  }
-}
+  clicks++;
+
+  scale = Math.min(scale + 0.15, 2.4);
+  yes_button.style.transform = `scale(${scale})`;
+
+  const list = answers_no[language];
+
+  if (i < list.length) {
+    no_button.textContent = list[i];
+    i++;
+  } else {
+    alert(list[list.length - 1]);
+    resetButtons();
