@@ -47,7 +47,7 @@ const questionHeading = document.getElementById("question-heading");
 const successMessage = document.getElementById("success-message");
 function createCalendarInvite() {
   const title = "Valentine’s Date 💕";
-  const description = "Movie and food 🍿🍽️\nYippee Love 💕 See you soooonnn";
+  const description = "Movie and food 🍿🍽️";
   const location = "Calicut";
   const inviteEmail = "prafeenaalicephilendran@gmail.com";
 
