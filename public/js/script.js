@@ -74,7 +74,21 @@ yes_button.addEventListener("click", () => {
   banner.src = "public/images/yes.gif";
   refreshBanner();
 
+  // Hide buttons
   document.querySelector(".buttons").style.display = "none";
+
+  // Replace question text
+  const questionHeading = document.getElementById("question-heading");
+
+  if (language === "french") {
+    questionHeading.textContent = "Je savais que tu dirais oui, Al 💖";
+  } else if (language === "thai") {
+    questionHeading.textContent = "เรารู้อยู่แล้วว่า Al ต้องตอบตกลง 💕";
+  } else {
+    questionHeading.textContent = "I knew you’d say yes, Al 💕";
+  }
+
+  // Show success message
   document.querySelector(".message").style.display = "block";
 });
 
@@ -98,8 +112,8 @@ function changeLanguage() {
     heading.textContent = "Al คืนดีกับเราได้อ่ะป่าว? 💖";
     success.textContent = "ฮูเร่ Al 💕 คืนดีกันแล้วน้า :3";
   } else {
-    heading.textContent = "Al, will you be my valentine? 💖";
-    success.textContent = "Yepppieee Al 💕 see you sooonnn :3";
+    heading.textContent = "asd";
+    success.textContent = "Yepppieee love💕 see you sooonnn :3";
   }
 
   no_button.textContent = answers_no[language][0];
